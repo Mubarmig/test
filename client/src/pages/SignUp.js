@@ -1,16 +1,16 @@
 import { sha256 } from 'js-sha256';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function Registration() {
+const SignUp = () => {
 
   const [email, setEmail] = useState();
   const [name, setName] = useState();
   const [password, setPassword] = useState();
   const [passwordCheck, setPasswordCheck] = useState();
   const [mobile, setMobile] = useState('-');
-  const history = useNavigate();
+  // const history = useNavigate();
 
   const handleChangeEmail = (event) => {
     setEmail(event.target.value);
@@ -37,7 +37,7 @@ function Registration() {
 
     try {
       await axios.post('https://localhost:4000/signup',{userInformation});
-      history.push("/signin");
+      // history.push("/signin");
     } catch (err) {
       console.log(err);
     }
@@ -66,4 +66,4 @@ function Registration() {
   );
 };
 
-export default Registration;
+export default SignUp;
