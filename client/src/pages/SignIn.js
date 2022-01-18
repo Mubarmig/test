@@ -5,11 +5,14 @@ import styled, { createGlobalStyle } from "styled-components";
 import logo from '../data/logo.png';
 
 const LoginContainer = styled.div`
+  border: 1px solid gray;
+  border-radius: 5px;
   margin: 0;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  padding: 0.8rem;
 `;
 
 const LoginInput = styled.input`
