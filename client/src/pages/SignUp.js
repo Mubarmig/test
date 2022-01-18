@@ -2,6 +2,18 @@ import { sha256 } from 'js-sha256';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import styled from "styled-components";
+
+const SignUpContainer = styled.div`
+  border: 1px solid gray;
+  border-radius: 5px;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0.8rem;
+`;
 
 const SignUp = () => {
 
@@ -44,7 +56,7 @@ const SignUp = () => {
   };
 
   return (
-      <form>
+      <SignUpContainer>
           <section>
             <h1>Registration</h1>
           </section>
@@ -62,7 +74,7 @@ const SignUp = () => {
             <button onClick={() => handleSignupSubmit()}>Submit</button>
           </p>
           <p>Already have an account? <a href="/">Sign in</a>.</p>
-      </form>
+      </SignUpContainer>
   );
 };
 
