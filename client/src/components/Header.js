@@ -8,6 +8,7 @@ const HeaderContainer = styled.header`
   border-bottom: 1px solid black;
   display: flex;
   justify-content: space-between;
+  z-index:1;
 `;
 
 const Logo = styled.img`

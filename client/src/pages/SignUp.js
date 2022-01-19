@@ -13,19 +13,26 @@ const SignUpContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 0.8rem;
+  z-index:2;
+
+  .inValidInput {
+    border-color: red;
+  }
 `;
 
 const SignUp = () => {
-
+  // Page redirection variance
+  const history = useNavigate();
+  // Input data variances
   const [email, setEmail] = useState();
   const [name, setName] = useState();
   const [password, setPassword] = useState();
   const [passwordCheck, setPasswordCheck] = useState();
   const [mobile, setMobile] = useState('-');
-  const history = useNavigate();
-
+  // Event handlers
   const handleChangeEmail = (event) => {
     setEmail(event.target.value);
+    isValidEmailFromat(email) ? setIsValidEmail(true) : setIsValidEmail(false);
   };
   const handleChangeName = (event) => {
     setName(event.target.value);
@@ -38,6 +45,7 @@ const SignUp = () => {
   };
   const handleChangeMobile = (event) => {
     setMobile(event.target.value);
+    if (mobile.length ===3 || mobile.length === 8) setMobile(mobile + '-')
   };
   const handleSignupSubmit = async () => {
     const userInformation = {
@@ -54,6 +62,13 @@ const SignUp = () => {
       console.log(err);
     }
   };
+  // Validation check
+  const isValidEmailFromat = (string) => {
+    const format = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
+    return format.test(string); 
+  }
+  const [isValidEmail, setIsValidEmail] = useState(true);
+  const [isValidPassword, setIsValidPassword] = useState(true);
 
   return (
       <SignUpContainer>
@@ -61,15 +76,16 @@ const SignUp = () => {
             <h1>Registration</h1>
           </section>
           <section>Email*</section>
-            <input type='text' placeholder='Enter Email' onChange={handleChangeEmail} required />
+            <input type='text' placeholder='Enter Email' onChange={handleChangeEmail} className={isValidEmail ? '' : 'inValidInput'} required />
+            {isValidEmail ? '' : <div>올바른 이메일 형식이 아닙니다</div>}
           <section>Name*</section>
-            <input type='text' placeholder='이름을 8자 이내로 입력해주세요' onChange={handleChangeName} required />
+            <input type='text' placeholder='이름을 8자 이내로 입력해주세요' onChange={handleChangeName} MaxLength='8' required />
           <section>Password*</section>
             <input type='password' placeholder='Enter Password' onChange={handleChangePassword} required />
           <section>Password Check*</section>
             <input type='password' placeholder='Enter Email' onChange={handleChangePasswordCheck} required />
           <section>Mobile</section>
-            <input type='text' placeholder='010-0000-0000' onChange={handleChangeMobile} />
+            <input type='tel' placeholder='010-0000-0000' onChange={handleChangeMobile} MaxLength='13' />
           <p>
             <button onClick={() => handleSignupSubmit()}>Submit</button>
           </p>

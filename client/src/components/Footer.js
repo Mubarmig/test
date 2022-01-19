@@ -6,6 +6,7 @@ const FooterContainer = styled.div`
   width: 100%;
   position: relative;
   padding: 10 0px;
+  z-index:1;
 `;
 
 const Container = styled.footer`
